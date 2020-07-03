@@ -159,6 +159,19 @@
 		<pluginManagement>
 			<plugins>
 				<plugin>
+					<groupId>org.jetbrains.dokka</groupId>
+					<artifactId>dokka-maven-plugin</artifactId>
+					<version>${dokka-version}</version>
+					<executions>
+						<execution>
+							<phase>pre-site</phase>
+							<goals>
+								<goal>dokka</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
 					<artifactId>maven-clean-plugin</artifactId>
 					<version>3.1.0</version>
 				</plugin>
@@ -218,24 +231,7 @@
 					</configuration>
 
 				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-javadoc-plugin</artifactId>
-					<version>3.1.0</version>
-					<configuration>
-					    <additionalJOptions>-Xdoclint:none</additionalJOptions>
-					    <!-- we need to allow script in comments or otherwise we can't use google analytics js in footer below - JD 2017-03-30 -->
-						<additionalJOption>--allow-script-in-comments</additionalJOption>
-						<maxmemory>256m</maxmemory>
-						<footer>
-							&lt;script src="http://www.google-analytics.com/urchin.js"
-							type="text/javascript"&gt;&lt;/script&gt;&lt;script
-							type="text/javascript"&gt;_uacct =
-							"UA-1326640-1";urchinTracker();&lt;/script&gt;
-						</footer>
-					</configuration>
 
-				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-shade-plugin</artifactId>
@@ -535,18 +531,6 @@
 
 	<reporting>
 		<plugins>
-			<plugin>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<configuration>
-					<goal>javadoc:aggregate</goal>
-					<breakiterator>true</breakiterator>
-					<quiet>true</quiet>
-					<source>${jdk.version}</source>
-					<verbose>false</verbose>
-					<linksource>true</linksource>
-
-				</configuration>
-			</plugin>
 			<plugin>
 				<artifactId>maven-project-info-reports-plugin</artifactId>
 				<version>2.9</version>
